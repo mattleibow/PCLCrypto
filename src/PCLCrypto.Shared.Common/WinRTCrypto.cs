@@ -48,11 +48,6 @@ namespace PCLCrypto
         private static IKeyDerivationParametersFactory keyDerivationParametersFactory;
 
         /// <summary>
-        /// Backing field for the CryptographicEngine property.
-        /// </summary>
-        private static ICryptographicEngine cryptographicEngine;
-
-        /// <summary>
         /// Backing field for the CryptographicBuffer property.
         /// </summary>
         private static ICryptographicBuffer cryptographicBuffer;
@@ -154,26 +149,6 @@ namespace PCLCrypto
                 }
 
                 return keyDerivationParametersFactory;
-#endif
-            }
-        }
-
-        /// <summary>
-        /// Gets the service for signatures and encryption.
-        /// </summary>
-        public static ICryptographicEngine CryptographicEngine
-        {
-            get
-            {
-#if PCL
-                throw new NotImplementedException("Not implemented in reference assembly.");
-#else
-                if (cryptographicEngine == null)
-                {
-                    cryptographicEngine = new CryptographicEngine();
-                }
-
-                return cryptographicEngine;
 #endif
             }
         }

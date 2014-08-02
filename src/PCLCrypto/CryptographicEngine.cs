@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ICryptographicEngine.cs" company="Andrew Arnott">
+// <copyright file="CryptographicEngine.cs" company="Andrew Arnott">
 //     Copyright (c) Andrew Arnott. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -14,7 +14,7 @@ namespace PCLCrypto
     /// <summary>
     /// Offers functionality similar to CryptographicEngine in WinRT.
     /// </summary>
-    public interface ICryptographicEngine
+    public static class CryptographicEngine
     {
         /// <summary>
         /// Encrypts data by using a symmetric or asymmetric algorithm.
@@ -35,7 +35,10 @@ namespace PCLCrypto
         /// more information, see Remarks.
         /// </param>
         /// <returns>Encrypted data.</returns>
-        byte[] Encrypt(ICryptographicKey key, byte[] data, byte[] iv = null);
+        public static byte[] Encrypt(ICryptographicKey key, byte[] data, byte[] iv = null)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Creates a cryptographic transform for use in a CryptoStream
@@ -44,7 +47,10 @@ namespace PCLCrypto
         /// <param name="key">The encryption key to use.</param>
         /// <param name="iv">The initialization vector, if applicable and nonzero.</param>
         /// <returns>The transform.</returns>
-        ICryptoTransform CreateEncryptor(ICryptographicKey key, byte[] iv = null);
+        public static ICryptoTransform CreateEncryptor(ICryptographicKey key, byte[] iv = null)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Decrypts content that was previously encrypted by using a symmetric or asymmetric
@@ -63,7 +69,10 @@ namespace PCLCrypto
         /// data. For more information, see Encrypt.
         /// </param>
         /// <returns>Decrypted data.</returns>
-        byte[] Decrypt(ICryptographicKey key, byte[] data, byte[] iv = null);
+        public static byte[] Decrypt(ICryptographicKey key, byte[] data, byte[] iv = null)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Creates a cryptographic transform for use in a CryptoStream
@@ -72,7 +81,10 @@ namespace PCLCrypto
         /// <param name="key">The decryption key to use.</param>
         /// <param name="iv">The initialization vector, if applicable and nonzero.</param>
         /// <returns>The transform.</returns>
-        ICryptoTransform CreateDecryptor(ICryptographicKey key, byte[] iv = null);
+        public static ICryptoTransform CreateDecryptor(ICryptographicKey key, byte[] iv = null)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Signs digital content.
@@ -80,7 +92,10 @@ namespace PCLCrypto
         /// <param name="key">Key used for signing.</param>
         /// <param name="data">Data to be signed.</param>
         /// <returns>The signature.</returns>
-        byte[] Sign(ICryptographicKey key, byte[] data);
+        public static byte[] Sign(ICryptographicKey key, byte[] data)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Signs the hashed input data using the specified key.
@@ -91,7 +106,10 @@ namespace PCLCrypto
         /// through incremental hash.
         /// </param>
         /// <returns>The signature.</returns>
-        byte[] SignHashedData(ICryptographicKey key, byte[] data);
+        public static byte[] SignHashedData(ICryptographicKey key, byte[] data)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Verifies a message signature.
@@ -103,7 +121,10 @@ namespace PCLCrypto
         /// <param name="data">Message to be verified.</param>
         /// <param name="signature">Signature previously computed over the message to be verified.</param>
         /// <returns>true if the message is verified.</returns>
-        bool VerifySignature(ICryptographicKey key, byte[] data, byte[] signature);
+        public static bool VerifySignature(ICryptographicKey key, byte[] data, byte[] signature)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Verifies the signature of the specified input data against a known signature.
@@ -114,7 +135,10 @@ namespace PCLCrypto
         /// <param name="data">The data to be verified. The data is a hashed value of raw data.</param>
         /// <param name="signature">The known signature to use to verify the signature of the input data.</param>
         /// <returns>True if the signature is verified; otherwise false.</returns>
-        bool VerifySignatureWithHashInput(ICryptographicKey key, byte[] data, byte[] signature);
+        public static bool VerifySignatureWithHashInput(ICryptographicKey key, byte[] data, byte[] signature)
+        {
+            throw new ReferenceAssemblyException();
+        }
 
         /// <summary>
         /// Derives a key from another key by using a key derivation function.
@@ -126,6 +150,9 @@ namespace PCLCrypto
         /// <returns>
         /// Buffer that contains the derived key.
         /// </returns>
-        byte[] DeriveKeyMaterial(ICryptographicKey key, IKeyDerivationParameters parameters, int desiredKeySize);
+        public static byte[] DeriveKeyMaterial(ICryptographicKey key, IKeyDerivationParameters parameters, int desiredKeySize)
+        {
+            throw new ReferenceAssemblyException();
+        }
     }
 }

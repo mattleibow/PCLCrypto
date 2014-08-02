@@ -90,8 +90,8 @@
             ICryptographicKey key = algorithm.CreateKey(this.keyMaterial);
             Assert.IsNotNull(key);
             Assert.AreEqual(this.keyMaterial.Length, key.KeySize);
-            byte[] mac = WinRTCrypto.CryptographicEngine.Sign(key, this.data);
-            Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignature(key, this.data, mac));
+            byte[] mac = CryptographicEngine.Sign(key, this.data);
+            Assert.IsTrue(CryptographicEngine.VerifySignature(key, this.data, mac));
             Assert.AreEqual(this.macBase64, Convert.ToBase64String(mac));
         }
 

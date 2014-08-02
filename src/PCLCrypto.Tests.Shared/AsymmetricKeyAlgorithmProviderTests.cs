@@ -244,12 +244,12 @@
                 }
 
                 // Verify that we can decrypt something encrypted previously (on WinRT)
-                byte[] decryptedPlaintext = WinRTCrypto.CryptographicEngine.Decrypt(key, cipherText);
+                byte[] decryptedPlaintext = CryptographicEngine.Decrypt(key, cipherText);
                 Assert.AreEqual(Convert.ToBase64String(decryptedPlaintext), Convert.ToBase64String(data));
 
                 // Now verify we can decrypt something we encrypted ourselves.
-                byte[] myciphertext = WinRTCrypto.CryptographicEngine.Encrypt(key, data);
-                byte[] myplaintext = WinRTCrypto.CryptographicEngine.Decrypt(key, myciphertext);
+                byte[] myciphertext = CryptographicEngine.Encrypt(key, data);
+                byte[] myplaintext = CryptographicEngine.Decrypt(key, myciphertext);
                 Assert.AreEqual(Convert.ToBase64String(data), Convert.ToBase64String(myplaintext));
 
                 return; // We only need one key format to work for the encryption test.
@@ -270,8 +270,8 @@
             ICryptographicKey key = rsa.ImportKeyPair(rsaPrivateKey, CryptographicPrivateKeyBlobType.Pkcs1RsaPrivateKey);
 
             byte[] data = new byte[] { 1, 2, 3 };
-            byte[] ciphertext = WinRTCrypto.CryptographicEngine.Encrypt(key, data);
-            byte[] plaintext = WinRTCrypto.CryptographicEngine.Decrypt(key, ciphertext);
+            byte[] ciphertext = CryptographicEngine.Encrypt(key, data);
+            byte[] plaintext = CryptographicEngine.Decrypt(key, ciphertext);
             Assert.AreEqual(Convert.ToBase64String(data), Convert.ToBase64String(plaintext));
         }
 #endif

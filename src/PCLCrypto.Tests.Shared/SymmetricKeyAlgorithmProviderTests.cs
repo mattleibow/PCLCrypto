@@ -33,7 +33,7 @@
                 () =>
                 {
                     var key = provider.CreateSymmetricKey(new byte[4]);
-                    WinRTCrypto.CryptographicEngine.Encrypt(key, new byte[] { 1, 2, 3 });
+                    CryptographicEngine.Encrypt(key, new byte[] { 1, 2, 3 });
                 });
         }
 

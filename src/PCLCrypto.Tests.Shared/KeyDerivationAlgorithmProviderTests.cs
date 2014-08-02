@@ -53,7 +53,7 @@
             Assert.AreEqual(this.iterations, parameters.IterationCount);
             CollectionAssertEx.AreEqual(this.salt, parameters.KdfGenericBinary);
 
-            byte[] keyMaterial = WinRTCrypto.CryptographicEngine.DeriveKeyMaterial(key, parameters, 20);
+            byte[] keyMaterial = CryptographicEngine.DeriveKeyMaterial(key, parameters, 20);
             Assert.AreEqual(this.stretchedKeyBase64, Convert.ToBase64String(keyMaterial));
         }
     }

@@ -49,29 +49,29 @@
         public void Sign_NullInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.Sign(null, this.data));
+                () => CryptographicEngine.Sign(null, this.data));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.Sign(this.rsaSha1SigningKey, null));
+                () => CryptographicEngine.Sign(this.rsaSha1SigningKey, null));
         }
 
         [TestMethod]
         public void VerifySignature_NullInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.VerifySignature(null, this.data, new byte[2]));
+                () => CryptographicEngine.VerifySignature(null, this.data, new byte[2]));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, null, new byte[2]));
+                () => CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, null, new byte[2]));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, null));
+                () => CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, null));
         }
 
         [TestMethod]
         public void SignAndVerifySignatureRsaSha1()
         {
-            byte[] signature = WinRTCrypto.CryptographicEngine.Sign(this.rsaSha1SigningKey, this.data);
-            Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, signature));
-            Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, PclTestUtilities.Tamper(this.data), signature));
-            Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, PclTestUtilities.Tamper(signature)));
+            byte[] signature = CryptographicEngine.Sign(this.rsaSha1SigningKey, this.data);
+            Assert.IsTrue(CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, signature));
+            Assert.IsFalse(CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, PclTestUtilities.Tamper(this.data), signature));
+            Assert.IsFalse(CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, PclTestUtilities.Tamper(signature)));
         }
 
         [TestMethod]
@@ -79,10 +79,10 @@
         {
             try
             {
-                byte[] signature = WinRTCrypto.CryptographicEngine.Sign(this.rsaSha256SigningKey, this.data);
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, PclTestUtilities.Tamper(this.data), signature));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, PclTestUtilities.Tamper(signature)));
+                byte[] signature = CryptographicEngine.Sign(this.rsaSha256SigningKey, this.data);
+                Assert.IsTrue(CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
+                Assert.IsFalse(CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, PclTestUtilities.Tamper(this.data), signature));
+                Assert.IsFalse(CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, PclTestUtilities.Tamper(signature)));
             }
             catch (NotSupportedException)
             {
@@ -95,8 +95,8 @@
         {
             try
             {
-                byte[] signature = WinRTCrypto.CryptographicEngine.Sign(this.rsaSha1SigningKey, this.data);
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
+                byte[] signature = CryptographicEngine.Sign(this.rsaSha1SigningKey, this.data);
+                Assert.IsFalse(CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
             }
             catch (NotSupportedException)
             {
@@ -108,9 +108,9 @@
         public void SignHashedData_InvalidInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.SignHashedData(null, this.data));
+                () => CryptographicEngine.SignHashedData(null, this.data));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, null));
+                () => CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, null));
         }
 
         [TestMethod]
@@ -118,11 +118,11 @@
         {
             var signature = new byte[23];
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(null, this.data, signature));
+                () => CryptographicEngine.VerifySignatureWithHashInput(null, this.data, signature));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, null, signature));
+                () => CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, null, signature));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, this.data, null));
+                () => CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, this.data, null));
         }
 
         [TestMethod]
@@ -132,10 +132,10 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha1)
                     .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, hash);
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, hash, signature));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, hash, PclTestUtilities.Tamper(signature)));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, PclTestUtilities.Tamper(this.data), signature));
+                byte[] signature = CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, hash);
+                Assert.IsTrue(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, hash, signature));
+                Assert.IsFalse(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, hash, PclTestUtilities.Tamper(signature)));
+                Assert.IsFalse(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, PclTestUtilities.Tamper(this.data), signature));
             }
             catch (NotSupportedException)
             {
@@ -151,9 +151,9 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha1)
                     .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, hash);
+                byte[] signature = CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, hash);
 
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, signature));
+                Assert.IsTrue(CryptographicEngine.VerifySignature(this.rsaSha1SigningKey, this.data, signature));
             }
             catch (NotSupportedException)
             {
@@ -169,9 +169,9 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha1)
                     .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.Sign(this.rsaSha1SigningKey, this.data);
+                byte[] signature = CryptographicEngine.Sign(this.rsaSha1SigningKey, this.data);
 
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, hash, signature));
+                Assert.IsTrue(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha1SigningKey, hash, signature));
             }
             catch (NotSupportedException)
             {
@@ -187,10 +187,10 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256)
                     .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.SignHashedData(this.rsaSha256SigningKey, hash);
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, signature));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, PclTestUtilities.Tamper(signature)));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, PclTestUtilities.Tamper(this.data), signature));
+                byte[] signature = CryptographicEngine.SignHashedData(this.rsaSha256SigningKey, hash);
+                Assert.IsTrue(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, signature));
+                Assert.IsFalse(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, PclTestUtilities.Tamper(signature)));
+                Assert.IsFalse(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, PclTestUtilities.Tamper(this.data), signature));
             }
             catch (NotSupportedException)
             {
@@ -206,9 +206,9 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256)
                     .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.SignHashedData(this.rsaSha256SigningKey, hash);
+                byte[] signature = CryptographicEngine.SignHashedData(this.rsaSha256SigningKey, hash);
 
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
+                Assert.IsTrue(CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
             }
             catch (NotSupportedException)
             {
@@ -224,9 +224,9 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256)
                  .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.Sign(this.rsaSha256SigningKey, this.data);
+                byte[] signature = CryptographicEngine.Sign(this.rsaSha256SigningKey, this.data);
 
-                Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, signature));
+                Assert.IsTrue(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, signature));
             }
             catch (NotSupportedException)
             {
@@ -242,9 +242,9 @@
             {
                 byte[] hash = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha1)
                 .HashData(this.data);
-                byte[] signature = WinRTCrypto.CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, hash);
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
-                Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, signature));
+                byte[] signature = CryptographicEngine.SignHashedData(this.rsaSha1SigningKey, hash);
+                Assert.IsFalse(CryptographicEngine.VerifySignature(this.rsaSha256SigningKey, this.data, signature));
+                Assert.IsFalse(CryptographicEngine.VerifySignatureWithHashInput(this.rsaSha256SigningKey, hash, signature));
             }
             catch (NotSupportedException)
             {
@@ -258,47 +258,47 @@
         [TestMethod]
         public void SignAndVerifySignatureMac()
         {
-            byte[] signature = WinRTCrypto.CryptographicEngine.Sign(this.macKey, this.data);
-            Assert.IsTrue(WinRTCrypto.CryptographicEngine.VerifySignature(this.macKey, this.data, signature));
-            Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.macKey, PclTestUtilities.Tamper(this.data), signature));
-            Assert.IsFalse(WinRTCrypto.CryptographicEngine.VerifySignature(this.macKey, this.data, PclTestUtilities.Tamper(signature)));
+            byte[] signature = CryptographicEngine.Sign(this.macKey, this.data);
+            Assert.IsTrue(CryptographicEngine.VerifySignature(this.macKey, this.data, signature));
+            Assert.IsFalse(CryptographicEngine.VerifySignature(this.macKey, PclTestUtilities.Tamper(this.data), signature));
+            Assert.IsFalse(CryptographicEngine.VerifySignature(this.macKey, this.data, PclTestUtilities.Tamper(signature)));
         }
 
         [TestMethod]
         public void Encrypt_InvalidInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.Encrypt(null, this.data, null));
+                () => CryptographicEngine.Encrypt(null, this.data, null));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.Encrypt(this.aesKey, null, null));
+                () => CryptographicEngine.Encrypt(this.aesKey, null, null));
         }
 
         [TestMethod]
         public void Decrypt_InvalidInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.Decrypt(null, this.data, null));
+                () => CryptographicEngine.Decrypt(null, this.data, null));
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.Decrypt(this.aesKey, null, null));
+                () => CryptographicEngine.Decrypt(this.aesKey, null, null));
         }
 
         [TestMethod]
         public void EncryptAndDecrypt_AES_NoIV()
         {
-            byte[] cipherText = WinRTCrypto.CryptographicEngine.Encrypt(this.aesKey, this.data, null);
+            byte[] cipherText = CryptographicEngine.Encrypt(this.aesKey, this.data, null);
             CollectionAssertEx.AreNotEqual(this.data, cipherText);
             Assert.AreEqual("oCSAA4sUCGa5ukwSJdeKWw==", Convert.ToBase64String(cipherText));
-            byte[] plainText = WinRTCrypto.CryptographicEngine.Decrypt(this.aesKey, cipherText, null);
+            byte[] plainText = CryptographicEngine.Decrypt(this.aesKey, cipherText, null);
             CollectionAssertEx.AreEqual(this.data, plainText);
         }
 
         [TestMethod]
         public void EncryptAndDecrypt_AES_IV()
         {
-            byte[] cipherText = WinRTCrypto.CryptographicEngine.Encrypt(this.aesKey, this.data, this.iv);
+            byte[] cipherText = CryptographicEngine.Encrypt(this.aesKey, this.data, this.iv);
             CollectionAssertEx.AreNotEqual(this.data, cipherText);
             Assert.AreEqual(DataAesCiphertextBase64, Convert.ToBase64String(cipherText));
-            byte[] plainText = WinRTCrypto.CryptographicEngine.Decrypt(this.aesKey, cipherText, this.iv);
+            byte[] plainText = CryptographicEngine.Decrypt(this.aesKey, cipherText, this.iv);
             CollectionAssertEx.AreEqual(this.data, plainText);
         }
 
@@ -307,10 +307,10 @@
         {
             if (this.aesKeyNoPadding != null)
             {
-                ExceptionAssert.Throws<ArgumentException>(() => WinRTCrypto.CryptographicEngine.Encrypt(this.aesKeyNoPadding, new byte[4], this.iv));
+                ExceptionAssert.Throws<ArgumentException>(() => CryptographicEngine.Encrypt(this.aesKeyNoPadding, new byte[4], this.iv));
             }
 
-            byte[] ciphertext = WinRTCrypto.CryptographicEngine.Encrypt(this.aesKey, new byte[4], this.iv);
+            byte[] ciphertext = CryptographicEngine.Encrypt(this.aesKey, new byte[4], this.iv);
             Assert.AreEqual(16, ciphertext.Length); // 16 is the block size for AES
         }
 
@@ -319,10 +319,10 @@
         {
             if (this.aesKeyNoPadding != null)
             {
-                ExceptionAssert.Throws<ArgumentException>(() => WinRTCrypto.CryptographicEngine.Decrypt(this.aesKeyNoPadding, new byte[4], this.iv));
+                ExceptionAssert.Throws<ArgumentException>(() => CryptographicEngine.Decrypt(this.aesKeyNoPadding, new byte[4], this.iv));
             }
 
-            ExceptionAssert.Throws<ArgumentException>(() => WinRTCrypto.CryptographicEngine.Decrypt(this.aesKey, new byte[4], this.iv));
+            ExceptionAssert.Throws<ArgumentException>(() => CryptographicEngine.Decrypt(this.aesKey, new byte[4], this.iv));
         }
 
         [TestMethod]
@@ -330,10 +330,10 @@
         {
             if (this.aesKeyNoPadding != null)
             {
-                ExceptionAssert.Throws<ArgumentException>(() => WinRTCrypto.CryptographicEngine.Encrypt(this.aesKeyNoPadding, new byte[0], this.iv));
+                ExceptionAssert.Throws<ArgumentException>(() => CryptographicEngine.Encrypt(this.aesKeyNoPadding, new byte[0], this.iv));
             }
 
-            byte[] ciphertext = WinRTCrypto.CryptographicEngine.Encrypt(this.aesKey, new byte[0], this.iv);
+            byte[] ciphertext = CryptographicEngine.Encrypt(this.aesKey, new byte[0], this.iv);
             Assert.AreEqual(16, ciphertext.Length); // 16 is the block size for AES
         }
 
@@ -342,10 +342,10 @@
         {
             if (this.aesKeyNoPadding != null)
             {
-                ExceptionAssert.Throws<ArgumentException>(() => WinRTCrypto.CryptographicEngine.Decrypt(this.aesKeyNoPadding, new byte[0], this.iv));
+                ExceptionAssert.Throws<ArgumentException>(() => CryptographicEngine.Decrypt(this.aesKeyNoPadding, new byte[0], this.iv));
             }
 
-            ExceptionAssert.Throws<ArgumentException>(() => WinRTCrypto.CryptographicEngine.Decrypt(this.aesKey, new byte[0], this.iv));
+            ExceptionAssert.Throws<ArgumentException>(() => CryptographicEngine.Decrypt(this.aesKey, new byte[0], this.iv));
         }
 
 #if !(SILVERLIGHT && !WINDOWS_PHONE) // Silverlight 5 doesn't include asymmetric crypto
@@ -354,12 +354,12 @@
         public void EncryptAndDecrypt_RSA()
         {
             byte[] keyMaterialBytes = Convert.FromBase64String(AesKeyMaterial);
-            byte[] cipherText = WinRTCrypto.CryptographicEngine.Encrypt(
+            byte[] cipherText = CryptographicEngine.Encrypt(
                 this.rsaEncryptingKey,
                 keyMaterialBytes,
                 null);
             CollectionAssertEx.AreNotEqual(keyMaterialBytes, cipherText);
-            byte[] plainText = WinRTCrypto.CryptographicEngine.Decrypt(this.rsaEncryptingKey, cipherText, null);
+            byte[] plainText = CryptographicEngine.Decrypt(this.rsaEncryptingKey, cipherText, null);
             CollectionAssertEx.AreEqual(keyMaterialBytes, plainText);
         }
 
@@ -369,20 +369,20 @@
         public void CreateEncryptor_InvalidInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.CreateEncryptor(null, this.iv));
+                () => CryptographicEngine.CreateEncryptor(null, this.iv));
         }
 
         [TestMethod]
         public void CreateDecryptor_InvalidInputs()
         {
             ExceptionAssert.Throws<ArgumentNullException>(
-                () => WinRTCrypto.CryptographicEngine.CreateDecryptor(null, this.iv));
+                () => CryptographicEngine.CreateDecryptor(null, this.iv));
         }
 
         [TestMethod]
         public void CreateEncryptor()
         {
-            var encryptor = WinRTCrypto.CryptographicEngine.CreateEncryptor(this.aesKey, this.iv);
+            var encryptor = CryptographicEngine.CreateEncryptor(this.aesKey, this.iv);
             byte[] cipherText = encryptor.TransformFinalBlock(this.data, 0, this.data.Length);
 
             Assert.AreEqual(DataAesCiphertextBase64, Convert.ToBase64String(cipherText));
@@ -404,12 +404,12 @@
                 var key2 = algorithmProvider.CreateSymmetricKey(keyMaterial);
 
                 byte[] allData = new byte[] { 1, 2, 3 };
-                byte[] allCiphertext = WinRTCrypto.CryptographicEngine.Encrypt(key1, allData);
+                byte[] allCiphertext = CryptographicEngine.Encrypt(key1, allData);
 
                 var cipherStream = new MemoryStream();
                 for (int i = 0; i < allData.Length; i++)
                 {
-                    byte[] cipherText = WinRTCrypto.CryptographicEngine.Encrypt(key2, new byte[] { allData[i] });
+                    byte[] cipherText = CryptographicEngine.Encrypt(key2, new byte[] { allData[i] });
                     cipherStream.Write(cipherText, 0, cipherText.Length);
                 }
 
@@ -440,12 +440,12 @@
                 var key2 = algorithmProvider.CreateSymmetricKey(keyMaterial);
 
                 byte[] allData = new byte[] { 1, 2, 3 };
-                byte[] allCiphertext = WinRTCrypto.CryptographicEngine.Decrypt(key1, allData);
+                byte[] allCiphertext = CryptographicEngine.Decrypt(key1, allData);
 
                 var cipherStream = new MemoryStream();
                 for (int i = 0; i < allData.Length; i++)
                 {
-                    byte[] cipherText = WinRTCrypto.CryptographicEngine.Decrypt(key2, new byte[] { allData[i] });
+                    byte[] cipherText = CryptographicEngine.Decrypt(key2, new byte[] { allData[i] });
                     cipherStream.Write(cipherText, 0, cipherText.Length);
                 }
 
@@ -478,9 +478,9 @@
                     for (int dataLengthFactor = 1; dataLengthFactor <= 3; dataLengthFactor++)
                     {
                         var data = WinRTCrypto.CryptographicBuffer.GenerateRandom((uint)(dataLengthFactor * algorithmProvider.BlockLength));
-                        var expected = WinRTCrypto.CryptographicEngine.Encrypt(key1, data, iv);
+                        var expected = CryptographicEngine.Encrypt(key1, data, iv);
 
-                        var encryptor = WinRTCrypto.CryptographicEngine.CreateEncryptor(key2, iv);
+                        var encryptor = CryptographicEngine.CreateEncryptor(key2, iv);
                         var actualStream = new MemoryStream();
                         using (var cryptoStream = CryptoStream.WriteTo(actualStream, encryptor))
                         {
@@ -506,14 +506,14 @@
         [TestMethod]
         public void CreateEncryptor_AcceptsNullIV()
         {
-            var encryptor = WinRTCrypto.CryptographicEngine.CreateEncryptor(this.aesKey, null);
+            var encryptor = CryptographicEngine.CreateEncryptor(this.aesKey, null);
             Assert.IsNotNull(encryptor);
         }
 
         [TestMethod]
         public void CreateDecryptor_AcceptsNullIV()
         {
-            var decryptor = WinRTCrypto.CryptographicEngine.CreateDecryptor(this.aesKey, null);
+            var decryptor = CryptographicEngine.CreateDecryptor(this.aesKey, null);
             Assert.IsNotNull(decryptor);
         }
 
@@ -521,7 +521,7 @@
         public void CreateDecryptor()
         {
             byte[] cipherText = Convert.FromBase64String(DataAesCiphertextBase64);
-            var decryptor = WinRTCrypto.CryptographicEngine.CreateDecryptor(this.aesKey, this.iv);
+            var decryptor = CryptographicEngine.CreateDecryptor(this.aesKey, this.iv);
             byte[] plaintext = decryptor.TransformFinalBlock(cipherText, 0, cipherText.Length);
             CollectionAssertEx.AreEqual(this.data, plaintext);
         }
@@ -529,8 +529,8 @@
         [TestMethod]
         public void EncryptDecryptStreamChain()
         {
-            var encryptor = WinRTCrypto.CryptographicEngine.CreateEncryptor(this.aesKey);
-            var decryptor = WinRTCrypto.CryptographicEngine.CreateDecryptor(this.aesKey);
+            var encryptor = CryptographicEngine.CreateEncryptor(this.aesKey);
+            var decryptor = CryptographicEngine.CreateDecryptor(this.aesKey);
 
             var decryptedStream = new MemoryStream();
             using (var decryptingStream = new CryptoStream(decryptedStream, decryptor, CryptoStreamMode.Write))
