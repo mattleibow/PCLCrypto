@@ -15,9 +15,9 @@ namespace PCLCrypto
     using Platform = Windows.Security.Cryptography.Core;
 
     /// <summary>
-    /// A WinRT implementation of the <see cref="ISymmetricKeyAlgorithmProvider"/> interface.
+    /// A WinRT implementation of the <see cref="SymmetricKeyAlgorithmProvider" /> interface.
     /// </summary>
-    internal class SymmetricKeyAlgorithmProvider : ISymmetricKeyAlgorithmProvider
+    public partial class SymmetricKeyAlgorithmProvider
     {
         /// <summary>
         /// The WinRT platform implementation.
@@ -39,19 +39,31 @@ namespace PCLCrypto
             this.platform = Platform.SymmetricKeyAlgorithmProvider.OpenAlgorithm(GetAlgorithmName(algorithm));
         }
 
-        /// <inheritdoc/>
-        public SymmetricAlgorithm Algorithm
-        {
-            get { return this.algorithm; }
-        }
-
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the size, in bytes, of the cipher block for the open algorithm.
+        /// </summary>
+        /// <value>Block size.</value>
         public int BlockLength
         {
             get { return (int)this.platform.BlockLength; }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the algorithm supported by this instance.
+        /// </summary>
+        internal SymmetricAlgorithm Algorithm
+        {
+            get { return this.algorithm; }
+        }
+
+        /// <summary>
+        /// Creates a symmetric key.
+        /// </summary>
+        /// <param name="keyMaterial">
+        /// Data used to generate the key. You can call the GenerateRandom method to
+        /// create random key material.
+        /// </param>
+        /// <returns>Symmetric key.</returns>
         public ICryptographicKey CreateSymmetricKey(byte[] keyMaterial)
         {
             Requires.NotNullOrEmpty(keyMaterial, "keyMaterial");

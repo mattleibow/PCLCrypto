@@ -32,8 +32,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)IMacAlgorithmProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IMacAlgorithmProviderFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRandomNumberGenerator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISymmetricKeyAlgorithmProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISymmetricKeyAlgorithmProviderFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)KeyDerivationAlgorithm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MacAlgorithm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NetFxCrypto.cs" />
@@ -43,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SymmetricAlgorithmMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SymmetricAlgorithmName.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SymmetricAlgorithmPadding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SymmetricKeyAlgorithmProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinRTCrypto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinRTExtensions.cs" />
   </ItemGroup>

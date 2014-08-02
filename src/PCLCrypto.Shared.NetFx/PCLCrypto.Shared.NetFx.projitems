@@ -22,6 +22,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)MacAlgorithmProviderFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MacCryptographicKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RandomNumberGenerator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SymmetricKeyAlgorithmProviderFactory.cs" />
   </ItemGroup>
 </Project>

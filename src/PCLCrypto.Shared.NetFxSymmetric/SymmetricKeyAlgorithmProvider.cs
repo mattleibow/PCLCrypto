@@ -15,9 +15,9 @@ namespace PCLCrypto
     using Platform = System.Security.Cryptography;
 
     /// <summary>
-    /// A .NET Framework implementation of the <see cref="ISymmetricKeyAlgorithmProvider"/> interface.
+    /// A .NET Framework implementation of the SymmetricKeyAlgorithmProvider interface.
     /// </summary>
-    internal class SymmetricKeyAlgorithmProvider : ISymmetricKeyAlgorithmProvider
+    public partial class SymmetricKeyAlgorithmProvider
     {
         /// <summary>
         /// The algorithm used by this instance.
@@ -28,18 +28,15 @@ namespace PCLCrypto
         /// Initializes a new instance of the <see cref="SymmetricKeyAlgorithmProvider"/> class.
         /// </summary>
         /// <param name="algorithm">The algorithm.</param>
-        public SymmetricKeyAlgorithmProvider(SymmetricAlgorithm algorithm)
+        internal SymmetricKeyAlgorithmProvider(SymmetricAlgorithm algorithm)
         {
             this.algorithm = algorithm;
         }
 
-        /// <inheritdoc/>
-        public SymmetricAlgorithm Algorithm
-        {
-            get { return this.algorithm; }
-        }
-
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the size, in bytes, of the cipher block for the open algorithm.
+        /// </summary>
+        /// <value>Block size.</value>
         public int BlockLength
         {
             get
@@ -51,7 +48,22 @@ namespace PCLCrypto
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the algorithm supported by this instance.
+        /// </summary>
+        internal SymmetricAlgorithm Algorithm
+        {
+            get { return this.algorithm; }
+        }
+
+        /// <summary>
+        /// Creates a symmetric key.
+        /// </summary>
+        /// <param name="keyMaterial">
+        /// Data used to generate the key. You can call the GenerateRandom method to
+        /// create random key material.
+        /// </param>
+        /// <returns>Symmetric key.</returns>
         public ICryptographicKey CreateSymmetricKey(byte[] keyMaterial)
         {
             Requires.NotNullOrEmpty(keyMaterial, "keyMaterial");

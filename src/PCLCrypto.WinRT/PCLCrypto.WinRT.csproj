@@ -50,7 +50,6 @@
     <Compile Include="KeyDerivationParametersFactory.cs" />
     <Compile Include="MacAlgorithmProvider.cs" />
     <Compile Include="MacAlgorithmProviderFactory.cs" />
-    <Compile Include="SymmetricKeyAlgorithmProviderFactory.cs" />
     <Compile Include="AsymmetricKeyAlgorithmProviderFactory.cs" />
     <Compile Include="CryptographicEngine.cs" />
     <Compile Include="CryptographicKey.cs" />

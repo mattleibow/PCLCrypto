@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ISymmetricKeyAlgorithmProvider.cs" company="Andrew Arnott">
+// <copyright file="SymmetricKeyAlgorithmProvider.cs" company="Andrew Arnott">
 //     Copyright (c) Andrew Arnott. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,16 +11,15 @@ namespace PCLCrypto
     using System.Linq;
     using System.Text;
 
-    /// <summary>
-    /// Represents a provider of symmetric key algorithms.
-    /// </summary>
-    public interface ISymmetricKeyAlgorithmProvider
+    /// <content>
+    /// Contains the PCL facade instance members of the class.</content>
+    public abstract partial class SymmetricKeyAlgorithmProvider
     {
         /// <summary>
         /// Gets the size, in bytes, of the cipher block for the open algorithm.
         /// </summary>
         /// <value>Block size.</value>
-        int BlockLength { get; }
+        public abstract int BlockLength { get; }
 
         /// <summary>
         /// Creates a symmetric key.
@@ -30,6 +29,6 @@ namespace PCLCrypto
         /// create random key material.
         /// </param>
         /// <returns>Symmetric key.</returns>
-        ICryptographicKey CreateSymmetricKey(byte[] keyMaterial);
+        public abstract ICryptographicKey CreateSymmetricKey(byte[] keyMaterial);
     }
 }

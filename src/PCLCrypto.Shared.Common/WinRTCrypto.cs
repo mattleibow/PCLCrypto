@@ -25,12 +25,6 @@ namespace PCLCrypto
 
         /// <summary>
         /// Backing field storing a shareable, thread-safe implementation
-        /// of <see cref="ISymmetricKeyAlgorithmProvider"/>.
-        /// </summary>
-        private static ISymmetricKeyAlgorithmProviderFactory symmetricKeyAlgorithmProvider;
-
-        /// <summary>
-        /// Backing field storing a shareable, thread-safe implementation
         /// of <see cref="IHashAlgorithmProviderFactory"/>.
         /// </summary>
         private static IHashAlgorithmProviderFactory hashAlgorithmProvider;
@@ -80,26 +74,6 @@ namespace PCLCrypto
                 }
 
                 return asymmetricKeyAlgorithmProvider;
-#endif
-            }
-        }
-
-        /// <summary>
-        /// Gets the symmetric key algorithm provider factory.
-        /// </summary>
-        public static ISymmetricKeyAlgorithmProviderFactory SymmetricKeyAlgorithmProvider
-        {
-            get
-            {
-#if PCL
-                throw new NotImplementedException("Not implemented in reference assembly.");
-#else
-                if (symmetricKeyAlgorithmProvider == null)
-                {
-                    symmetricKeyAlgorithmProvider = new SymmetricKeyAlgorithmProviderFactory();
-                }
-
-                return symmetricKeyAlgorithmProvider;
 #endif
             }
         }

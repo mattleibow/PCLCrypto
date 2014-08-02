@@ -101,7 +101,7 @@
         [TestMethod]
         public void ExportParametersThrowsOnSymmetricKey()
         {
-            var keyProvider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7);
+            var keyProvider = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7);
             var key = keyProvider.CreateSymmetricKey(new byte[keyProvider.BlockLength]);
             ExceptionAssert.Throws<NotSupportedException>(() => key.ExportParameters(includePrivateParameters: false));
         }

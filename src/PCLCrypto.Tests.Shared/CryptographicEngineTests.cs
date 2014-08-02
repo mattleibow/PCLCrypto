@@ -35,7 +35,7 @@
             .OpenAlgorithm(MacAlgorithm.HmacSha1)
             .CreateKey(new byte[] { 0x2, 0x4, 0x6 });
 
-        private readonly ICryptographicKey aesKey = WinRTCrypto.SymmetricKeyAlgorithmProvider
+        private readonly ICryptographicKey aesKey = SymmetricKeyAlgorithmProvider
             .OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7)
             .CreateSymmetricKey(Convert.FromBase64String(AesKeyMaterial));
 
@@ -397,7 +397,7 @@
             SymmetricAlgorithm symmetricAlgorithm = SymmetricAlgorithm.Rc4;
             try
             {
-                var algorithmProvider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(symmetricAlgorithm);
+                var algorithmProvider = SymmetricKeyAlgorithmProvider.OpenAlgorithm(symmetricAlgorithm);
                 uint keyLength = GetKeyLength(symmetricAlgorithm, algorithmProvider);
                 byte[] keyMaterial = WinRTCrypto.CryptographicBuffer.GenerateRandom(keyLength);
                 var key1 = algorithmProvider.CreateSymmetricKey(keyMaterial);
@@ -433,7 +433,7 @@
             SymmetricAlgorithm symmetricAlgorithm = SymmetricAlgorithm.Rc4;
             try
             {
-                var algorithmProvider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(symmetricAlgorithm);
+                var algorithmProvider = SymmetricKeyAlgorithmProvider.OpenAlgorithm(symmetricAlgorithm);
                 uint keyLength = GetKeyLength(symmetricAlgorithm, algorithmProvider);
                 byte[] keyMaterial = WinRTCrypto.CryptographicBuffer.GenerateRandom(keyLength);
                 var key1 = algorithmProvider.CreateSymmetricKey(keyMaterial);
@@ -467,7 +467,7 @@
             {
                 try
                 {
-                    var algorithmProvider = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(symmetricAlgorithm);
+                    var algorithmProvider = SymmetricKeyAlgorithmProvider.OpenAlgorithm(symmetricAlgorithm);
                     uint keyLength = GetKeyLength(symmetricAlgorithm, algorithmProvider);
 
                     byte[] keyMaterial = WinRTCrypto.CryptographicBuffer.GenerateRandom(keyLength);
@@ -544,7 +544,7 @@
             CollectionAssertEx.AreEqual(this.data, decryptedStream.ToArray());
         }
 
-        private static uint GetKeyLength(SymmetricAlgorithm symmetricAlgorithm, ISymmetricKeyAlgorithmProvider algorithmProvider)
+        private static uint GetKeyLength(SymmetricAlgorithm symmetricAlgorithm, SymmetricKeyAlgorithmProvider algorithmProvider)
         {
             uint keyLength;
             switch (symmetricAlgorithm)
@@ -567,7 +567,7 @@
         {
             try
             {
-                return WinRTCrypto.SymmetricKeyAlgorithmProvider
+                return SymmetricKeyAlgorithmProvider
                     .OpenAlgorithm(algorithm)
                     .CreateSymmetricKey(Convert.FromBase64String(keyMaterialBase64));
             }
