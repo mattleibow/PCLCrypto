@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="SymmetricKeyAlgorithmProvider.cs" company="Andrew Arnott">
+// <copyright file="SymmetricKeyAlgorithmProviderPlatform.cs" company="Andrew Arnott">
 //     Copyright (c) Andrew Arnott. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace PCLCrypto
     /// <summary>
     /// A .NET Framework implementation of the SymmetricKeyAlgorithmProvider interface.
     /// </summary>
-    public partial class SymmetricKeyAlgorithmProvider
+    internal class SymmetricKeyAlgorithmProviderPlatform : SymmetricKeyAlgorithmProvider
     {
         /// <summary>
         /// The algorithm used by this instance.
@@ -26,19 +26,16 @@ namespace PCLCrypto
         private readonly SymmetricAlgorithm algorithm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SymmetricKeyAlgorithmProvider"/> class.
+        /// Initializes a new instance of the <see cref="SymmetricKeyAlgorithmProviderPlatform"/> class.
         /// </summary>
-        /// <param name="algorithm">The algorithm.</param>
-        public SymmetricKeyAlgorithmProvider(SymmetricAlgorithm algorithm)
+        /// <param name="algorithm">The algorithm.</param>e
+        internal SymmetricKeyAlgorithmProviderPlatform(SymmetricAlgorithm algorithm)
         {
             this.algorithm = algorithm;
         }
 
-        /// <summary>
-        /// Gets the size, in bytes, of the cipher block for the open algorithm.
-        /// </summary>
-        /// <value>Block size.</value>
-        public int BlockLength
+        /// <inheritdoc />
+        public override int BlockLength
         {
             get
             {
@@ -72,7 +69,7 @@ namespace PCLCrypto
         /// create random key material.
         /// </param>
         /// <returns>Symmetric key.</returns>
-        public ICryptographicKey CreateSymmetricKey(byte[] keyMaterial)
+        public override ICryptographicKey CreateSymmetricKey(byte[] keyMaterial)
         {
             Requires.NotNullOrEmpty(keyMaterial, "keyMaterial");
 

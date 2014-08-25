@@ -44,7 +44,7 @@
     <Compile Include="RsaAsymmetricKeyAlgorithmProvider.cs" />
     <Compile Include="RsaCryptographicKey.cs" />
     <Compile Include="SymmetricCryptographicKey.cs" />
-    <Compile Include="SymmetricKeyAlgorithmProvider.cs" />
+    <Compile Include="SymmetricKeyAlgorithmProviderPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

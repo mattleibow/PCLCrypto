@@ -55,7 +55,7 @@
     <Compile Include="CryptographicKey.cs" />
     <Compile Include="DeriveBytes.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
-    <Compile Include="SymmetricKeyAlgorithmProvider.cs" />
+    <Compile Include="SymmetricKeyAlgorithmProviderPlatform.cs" />
     <Compile Include="WinRTUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

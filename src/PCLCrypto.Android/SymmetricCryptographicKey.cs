@@ -272,7 +272,7 @@ namespace PCLCrypto
         private bool IsValidInputSize(int lengthInBytes)
         {
             var cipher = this.encryptingCipher ?? this.decryptingCipher;
-            int blockSizeInBytes = SymmetricKeyAlgorithmProvider.GetBlockSize(this.algorithm, cipher);
+            int blockSizeInBytes = SymmetricKeyAlgorithmProviderPlatform.GetBlockSize(this.algorithm, cipher);
             return lengthInBytes > 0 && lengthInBytes % blockSizeInBytes == 0;
         }
 
@@ -318,7 +318,7 @@ namespace PCLCrypto
             /// <inheritdoc />
             public int InputBlockSize
             {
-                get { return SymmetricKeyAlgorithmProvider.GetBlockSize(this.algorithm, this.transform); }
+                get { return SymmetricKeyAlgorithmProviderPlatform.GetBlockSize(this.algorithm, this.transform); }
             }
 
             /// <inheritdoc />

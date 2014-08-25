@@ -12,6 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MacAlgorithmProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NetFxCryptographicHash.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SymmetricCryptographicKey.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SymmetricKeyAlgorithmProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SymmetricKeyAlgorithmProviderPlatform.cs" />
   </ItemGroup>
 </Project>

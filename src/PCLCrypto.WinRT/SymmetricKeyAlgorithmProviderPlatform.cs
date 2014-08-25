@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="SymmetricKeyAlgorithmProvider.cs" company="Andrew Arnott">
+// <copyright file="SymmetricKeyAlgorithmProviderPlatform.cs" company="Andrew Arnott">
 //     Copyright (c) Andrew Arnott. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace PCLCrypto
     /// <summary>
     /// A WinRT implementation of the <see cref="SymmetricKeyAlgorithmProvider" /> interface.
     /// </summary>
-    public partial class SymmetricKeyAlgorithmProvider
+    internal class SymmetricKeyAlgorithmProviderPlatform : SymmetricKeyAlgorithmProvider
     {
         /// <summary>
         /// The WinRT platform implementation.
@@ -30,20 +30,17 @@ namespace PCLCrypto
         private readonly SymmetricAlgorithm algorithm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SymmetricKeyAlgorithmProvider"/> class.
+        /// Initializes a new instance of the <see cref="SymmetricKeyAlgorithmProviderPlatform"/> class.
         /// </summary>
         /// <param name="algorithm">The algorithm.</param>
-        public SymmetricKeyAlgorithmProvider(SymmetricAlgorithm algorithm)
+        public SymmetricKeyAlgorithmProviderPlatform(SymmetricAlgorithm algorithm)
         {
             this.algorithm = algorithm;
             this.platform = Platform.SymmetricKeyAlgorithmProvider.OpenAlgorithm(GetAlgorithmName(algorithm));
         }
 
-        /// <summary>
-        /// Gets the size, in bytes, of the cipher block for the open algorithm.
-        /// </summary>
-        /// <value>Block size.</value>
-        public int BlockLength
+        /// <inheritdoc />
+        public override int BlockLength
         {
             get { return (int)this.platform.BlockLength; }
         }
@@ -56,15 +53,8 @@ namespace PCLCrypto
             get { return this.algorithm; }
         }
 
-        /// <summary>
-        /// Creates a symmetric key.
-        /// </summary>
-        /// <param name="keyMaterial">
-        /// Data used to generate the key. You can call the GenerateRandom method to
-        /// create random key material.
-        /// </param>
-        /// <returns>Symmetric key.</returns>
-        public ICryptographicKey CreateSymmetricKey(byte[] keyMaterial)
+        /// <inheritdoc />
+        public override ICryptographicKey CreateSymmetricKey(byte[] keyMaterial)
         {
             Requires.NotNullOrEmpty(keyMaterial, "keyMaterial");
 
